@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+
+   
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+          alt="logo"
+        />
+      </div>
+      <div class="hamburger-nav">
+        <svg
+          height="32px"
+          id="Layer_1"
+          style="enable-background: new 0 0 32 32"
+          version="1.1"
+          viewBox="0 0 32 32"
+          width="32px"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <path
+            style="fill: white"
+            d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"
+          />
+        </svg>
+
+        <div class="wrapper">
+          <select name="pokemonList" class="list">
+            <option value="names">NAMES</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="pokedex-container">
+        <div class="pokedex">
+          <div class="panel left-panel">
+            <h3 class="pokemon-name screen" id="pokemonName"></h3>
+
+            <img class="poke-img" id="pokemonImg" src="" />
+
+            <div class="controls">
+              <div class="btn-fronteview">
+                <img src="images/redo.png" />
+              </div>
+              <div class="btn-shiny">Shiny</div>
+              <div class="btn-rearview">
+                <img src="images/undo.png" />
+              </div>
+            </div>
+
+            <p class="pokemon-description screen">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consequatur quae perferendis, officia corrupti nam consectetur
+              non. Libero quidem expedita eum quam, optio excepturi nobis?
+              Blanditiis natus sit cum impedit nam?
+            </p>
+          </div>
+          <div class="border">
+            <img src="./images/PokedexBorder.jpeg" alt="border" />
+          </div>
+          <div class="panel right-panel">
+            <div class="right-topBox">
+            <div class="abillity screen"></div>
+            <div class="type screen">
+              <h2 >Types</h2>
+              <h3>grass</h3>
+            </div>
+          </div>
+          <div class="right-centerBox">
+            
+
+
+
+
+
+          </div>
+          <div class="search-box">
+            <input type="text" id="pokemonName" placeholder="Wtire pokemon's name">
+            <input type="number" id="pokemonId" placeholder="Write pokemon Num">
+            <button id="search">Search</button>
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <script src="./script.js"></script>
+    
+
+    
+  </body>
+</html>
