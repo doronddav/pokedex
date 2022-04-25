@@ -30,12 +30,12 @@ const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
 
 fetch(`${pokemonApi}`)
   .then((response) => response.json())
-  .then((response) => fetch(response.results[10].url))
+  .then((response) => fetch(response.results[0].url))
 
   .then((response) => response.json())
   // .then((response) => console.log(response))
   .then(
-    (response) => (pokemon = new Pokemon(response.name, response.species.url))
+    (response) => (pokemon = new Pokemon(response.name))
   )
   .then((pokemon) => console.log(pokemon.name))
   .finally(() => displayPokemon());
