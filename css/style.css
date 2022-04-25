@@ -242,6 +242,10 @@ img {
   border-radius: 50px;
   margin-top: 40px;
 }
+ul > li {
+  width: 120px;
+  margin-left: 12px;
+}
 .moves-bigBox {
   display: flex;
   flex-direction: row;
