@@ -34,7 +34,7 @@ const pokemonApi = `https://pokeapi.co/api/v2/pokemon?limit=1126/`;
 
 fetch(`${pokemonApi}`)
   .then((response) => response.json())
-  .then((response) => fetch(response.results[20].url))
+  .then((response) => fetch(response.results[150].url))
 
   .then((response) => response.json())
   // .then((response) => console.log(response))

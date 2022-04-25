@@ -254,17 +254,13 @@ ul > li {
   border: 1px solid black;
   width: 245px;
   height: 220px;
+  overflow: overlay;
 }
 .display-moves > ul {
   margin-left: 29px;
   font-size: 23px;
 }
-.buttons {
-  margin: 46px 0px 0px 14px;
-}
-.scroll {
-  margin: 15px 0px;
-}
+
 .search-box {
   display: flex;
   flex-direction: column;
