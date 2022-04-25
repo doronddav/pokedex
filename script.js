@@ -23,8 +23,12 @@ let pokemonName = document.getElementById("pokemonName");
 let pokemonImg = document.getElementById("pokemonImg");
 let movesLi = document.getElementById("moves");
 let typesLi = document.getElementById("type");
+let shiny = document.getElementById("shiny");
+let fronteview = document.getElementById("fronteview");
+let rearview = document.getElementById("rearview");
 let pokemon;
-
+let pokemonShiny = false;
+let rearViewImg = false;
 const num = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon?limit=1126/`;
 
@@ -38,7 +42,7 @@ fetch(`${pokemonApi}`)
     (response) =>
       (pokemon = new Pokemon(
         response.name,
-        response.sprites.front_default,
+        response.sprites,
         response.moves,
         response.types
       ))
@@ -49,7 +53,7 @@ fetch(`${pokemonApi}`)
 
 let displayPokemon = function () {
   pokemonName.innerHTML = pokemon.name;
-  pokemonImg.src = pokemon.image;
+  pokemonImg.src = pokemon.image.front_default;
   displayMoves(pokemon.moves);
   displayType(pokemon.types);
 };
@@ -69,3 +73,43 @@ let displayType = function (types) {
     typesLi.appendChild(typeElement);
   }
 };
+
+shiny.addEventListener("click", (event) => {
+  if (pokemonShiny) {
+    pokemonShiny = false;
+    if (!rearViewImg) {
+      pokemonImg.src = pokemon.image.front_default;
+    } else {
+      pokemonImg.src = pokemon.image.back_default;
+    }
+  } else {
+    pokemonShiny = true;
+
+    if (!rearViewImg) {
+      pokemonImg.src = pokemon.image.front_shiny;
+    } else {
+      pokemonImg.src = pokemon.image.back_shiny;
+    }
+  }
+});
+
+// Rotate
+fronteview.addEventListener("click", (event) => {
+  rearViewImg = false;
+  if (!pokemonShiny) {
+    pokemonImg.src = pokemon.image.front_default;
+  } else {
+    pokemonImg.src = pokemon.image.front_shiny;
+  }
+});
+
+rearview.addEventListener("click", (event) => {
+  rearViewImg = true;
+  if (!pokemonShiny) {
+    pokemonImg.src = pokemon.image.back_default;
+  } else {
+    pokemonImg.src = pokemon.image.back_shiny;
+  }
+});
+
+/*comment*/
