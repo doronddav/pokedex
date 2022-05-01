@@ -29,27 +29,30 @@ let rearview = document.getElementById("rearview");
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
-let num = 1;
+var num = 0;
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon?limit=1126/`;
 
-fetch(`${pokemonApi}`)
-  .then((response) => response.json())
-  .then((response) => fetch(response.results[100].url))
+// Search function
+let fetetchPokemon = function (num) {
+  fetch(`${pokemonApi}`)
+    .then((response) => response.json())
+    .then((response) => fetch(response.results[`${num}`].url))
 
-  .then((response) => response.json())
-  // .then((response) => console.log(response))
-  .then(
-    (response) =>
-      (pokemon = new Pokemon(
-        response.name,
-        response.sprites,
-        response.moves,
-        response.types
-      ))
-  )
-  // .then((pokemon) => console.log(pokemon.name));
-  // .then((pokemon) => console.log(pokemon.types[0].type.name))
-  .finally();
+    .then((response) => response.json())
+    // .then((response) => console.log(response))
+    .then(
+      (response) =>
+        (pokemon = new Pokemon(
+          response.name,
+          response.sprites,
+          response.moves,
+          response.types
+        ))
+    )
+    // .then((pokemon) => console.log(pokemon.name));
+    // .then((pokemon) => console.log(pokemon.types[0].type.name))
+    .finally();
+};
 
 let displayPokemon = function () {
   pokemonName.innerHTML = pokemon.name;
@@ -113,8 +116,8 @@ rearview.addEventListener("click", (event) => {
 });
 
 search.addEventListener("click", (event) => {
-  num == pokeId.value;
+  num === pokeId.value;
   console.log(num);
-
+  fetetchPokemon;
   displayPokemon();
 });
