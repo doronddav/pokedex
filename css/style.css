@@ -254,6 +254,7 @@ ul > li {
   border: 1px solid black;
   width: 245px;
   height: 220px;
+  overflow: overlay;
 }
 .display-moves > ul {
   margin-left: 29px;

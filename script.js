@@ -29,12 +29,12 @@ let rearview = document.getElementById("rearview");
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
-const num = "";
+let num = 1;
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon?limit=1126/`;
 
 fetch(`${pokemonApi}`)
   .then((response) => response.json())
-  .then((response) => fetch(response.results[20].url))
+  .then((response) => fetch(response.results[100].url))
 
   .then((response) => response.json())
   // .then((response) => console.log(response))
@@ -48,8 +48,8 @@ fetch(`${pokemonApi}`)
       ))
   )
   // .then((pokemon) => console.log(pokemon.name));
-  .then((pokemon) => console.log(pokemon.types[0].type.name))
-  .finally(() => displayPokemon());
+  // .then((pokemon) => console.log(pokemon.types[0].type.name))
+  .finally();
 
 let displayPokemon = function () {
   pokemonName.innerHTML = pokemon.name;
@@ -112,4 +112,9 @@ rearview.addEventListener("click", (event) => {
   }
 });
 
-/*comment*/
+search.addEventListener("click", (event) => {
+  num == pokeId.value;
+  console.log(num);
+
+  displayPokemon();
+});
