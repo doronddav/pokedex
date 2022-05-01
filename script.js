@@ -29,14 +29,14 @@ let rearview = document.getElementById("rearview");
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
+
 // pokeIdInput = false;
 // pokeNameInput = false;
 let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
 
-//pokeapi.co/api/v2/pokemon?limit=1126/--- -----
-// Search function
+
 let fetetchPokemon = function (inputNum) {
   https: fetch(`${pokemonApi}` + `${inputNum}`)
     .then((response) => response.json())
@@ -55,6 +55,7 @@ let fetetchPokemon = function (inputNum) {
     // .then((pokemon) => console.log(pokemon.types[0].type.name))
     .finally(() => displayPokemon());
 };
+
 
 let displayPokemon = function () {
   pokemonName.innerHTML = pokemon.name;
@@ -119,6 +120,7 @@ rearview.addEventListener("click", (event) => {
   }
 });
 
+
 // let displayinput = function () {
 //   if (pokeIdInput.value.length > 0) {
 //     pokeInputName.style.display = "none";
@@ -133,3 +135,4 @@ search.addEventListener("click", (event) => {
   console.log(inputNum);
   fetetchPokemon(inputNum);
 });
+
