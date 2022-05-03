@@ -1,13 +1,4 @@
 class Pokemon {
-  //   constructor(inputNum, name, image, description, abillity, types) {
-  //     this.inputNum = inputNum;
-  //     this.name = name;
-  //     this.image = image;
-  //     this.description = description;
-  //     this.abillity = abillity;
-  //     this.types = types;
-  //   }
-
   constructor(name, image, moves, types, abilities) {
     this.name = name;
     this.image = image;
@@ -24,7 +15,7 @@ let pokemonName = document.getElementById("pokemonNameDisplay");
 let pokemonImg = document.getElementById("pokemonImg");
 let movesLi = document.getElementById("moves");
 let typesLi = document.getElementById("type");
-let abilitiesLi = document.getElementById("ability")
+let abilitiesLi = document.getElementById("ability");
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
 let rearview = document.getElementById("rearview");
@@ -32,8 +23,6 @@ let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
 
-// pokeIdInput = false;
-// pokeNameInput = false;
 let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
@@ -133,19 +122,8 @@ rearview.addEventListener("click", (event) => {
   }
 });
 
-
-// let displayinput = function () {
-//   if (pokeIdInput.value.length > 0) {
-//     pokeInputName.style.display = "none";
-//   } else if (pokeInputName.value.length > 0) {
-//     pokeIdInput.style.display = "none";
-//   }
-// };
-// displayinput();
-
 search.addEventListener("click", (event) => {
   inputNum = pokeIdInput.value;
   console.log(inputNum);
   fetetchPokemon(inputNum);
 });
-
