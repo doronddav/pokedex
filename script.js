@@ -36,26 +36,29 @@ let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
 
+// let fetetchPokemon = function (inputNum) {
+https: fetch(`${pokemonApi}` + `${inputNum}`)
+  .then((response) => response.json())
 
-let fetetchPokemon = function (inputNum) {
-  https: fetch(`${pokemonApi}` + `${inputNum}`)
-    .then((response) => response.json())
+  // .then((response) => console.log(response))
+  .then(
+    (response) =>
+      (pokemon = new Pokemon(
+        response.name,
+        response.sprites,
+        response.moves,
+        response.types
+      ))
+  )
+  // .then((pokemon) => console.log(pokemon.name))
+  // .then((pokemon) => console.log(pokemon.types[0].type.name))
+  .then(displayPokemon());
+// .finally(() => displayPokemon());
+// };
 
-    // .then((response) => console.log(response))
-    .then(
-      (response) =>
-        (pokemon = new Pokemon(
-          response.name,
-          response.sprites,
-          response.moves,
-          response.types
-        ))
-    )
-    // .then((pokemon) => console.log(pokemon.name));
-    // .then((pokemon) => console.log(pokemon.types[0].type.name))
-    .finally(() => displayPokemon());
+let displayJson = function (api) {
+  console.log(api);
 };
-
 
 let displayPokemon = function () {
   pokemonName.innerHTML = pokemon.name;
@@ -120,7 +123,6 @@ rearview.addEventListener("click", (event) => {
   }
 });
 
-
 // let displayinput = function () {
 //   if (pokeIdInput.value.length > 0) {
 //     pokeInputName.style.display = "none";
@@ -135,4 +137,3 @@ search.addEventListener("click", (event) => {
   console.log(inputNum);
   fetetchPokemon(inputNum);
 });
-
