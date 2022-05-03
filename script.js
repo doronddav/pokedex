@@ -8,11 +8,12 @@ class Pokemon {
   //     this.types = types;
   //   }
 
-  constructor(name, image, moves, types) {
+  constructor(name, image, moves, types, abilities) {
     this.name = name;
     this.image = image;
     this.moves = moves;
     this.types = types;
+    this.abilities = abilities;
   }
 }
 
@@ -23,6 +24,7 @@ let pokemonName = document.getElementById("pokemonNameDisplay");
 let pokemonImg = document.getElementById("pokemonImg");
 let movesLi = document.getElementById("moves");
 let typesLi = document.getElementById("type");
+let abilitiesLi = document.getElementById("ability")
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
 let rearview = document.getElementById("rearview");
@@ -48,7 +50,8 @@ let fetetchPokemon = function (inputNum) {
           response.name,
           response.sprites,
           response.moves,
-          response.types
+          response.types,
+          response.abilities
         ))
     )
     // .then((pokemon) => console.log(pokemon.name));
@@ -62,6 +65,7 @@ let displayPokemon = function () {
   pokemonImg.src = pokemon.image.front_default;
   displayMoves(pokemon.moves);
   displayType(pokemon.types);
+  displayAbilities(pokemon.abilities);
 };
 
 let displayMoves = function (moves) {
@@ -79,6 +83,15 @@ let displayType = function (types) {
     let typeElement = document.createElement("li");
     typeElement.innerHTML = types[i].type.name;
     typesLi.appendChild(typeElement);
+  }
+};
+
+let displayAbilities = function (abilities) {
+  abilitiesLi.innerHTML = "";
+  for (let i = 0; i < abilities.length; i++) {
+    let abiltiyElement = document.createElement("li");
+    abiltiyElement.innerHTML = abilities[i].ability.name;
+    abilitiesLi.appendChild(abiltiyElement);
   }
 };
 
