@@ -220,10 +220,15 @@ img {
 }
 .abillity {
   border: 1px solid black;
-
   width: 50%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.62);
+}
+
+.abillity > h2 {
+  background-color:  silver;
+  text-align: center;
+  border-radius: 50px;
 }
 .type {
   width: 50%;
@@ -256,6 +261,13 @@ ul > li {
   height: 220px;
   overflow: overlay;
 }
+
+.display-moves > h2{
+  background-color:  silver;
+  text-align: center;
+  border-radius: 50px;
+}
+
 .display-moves > ul {
   margin-left: 29px;
   font-size: 23px;
