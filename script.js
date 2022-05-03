@@ -27,25 +27,27 @@ let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
 
-// let fetetchPokemon = function (inputNum) {
-https: fetch(`${pokemonApi}` + `${inputNum}`)
-  .then((response) => response.json())
 
-  // .then((response) => console.log(response))
-  .then(
-    (response) =>
-      (pokemon = new Pokemon(
-        response.name,
-        response.sprites,
-        response.moves,
-        response.types
-      ))
-  )
-  // .then((pokemon) => console.log(pokemon.name))
-  // .then((pokemon) => console.log(pokemon.types[0].type.name))
-  .then(displayPokemon());
-// .finally(() => displayPokemon());
-// };
+let fetetchPokemon = function (inputNum) {
+  https: fetch(`${pokemonApi}` + `${inputNum}`)
+    .then((response) => response.json())
+
+    // .then((response) => console.log(response))
+    .then(
+      (response) =>
+        (pokemon = new Pokemon(
+          response.name,
+          response.sprites,
+          response.moves,
+          response.types,
+          response.abilities
+        ))
+    )
+    // .then((pokemon) => console.log(pokemon.name));
+    // .then((pokemon) => console.log(pokemon.types[0].type.name))
+    .then(displayPokemon());
+};
+
 
 let displayPokemon = function () {
   pokemonName.innerHTML = pokemon.name;
