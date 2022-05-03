@@ -56,7 +56,7 @@ let fetetchPokemon = function (inputNum) {
     )
     // .then((pokemon) => console.log(pokemon.name));
     // .then((pokemon) => console.log(pokemon.types[0].type.name))
-    .finally(() => displayPokemon());
+    .then(displayPokemon());
 };
 
 
