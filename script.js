@@ -1,19 +1,9 @@
 class Pokemon {
-  //   constructor(inputNum, name, image, description, abillity, types) {
-  //     this.inputNum = inputNum;
-  //     this.name = name;
-  //     this.image = image;
-  //     this.description = description;
-  //     this.abillity = abillity;
-  //     this.types = types;
-  //   }
-
   constructor(name, image, moves, types) {
     this.name = name;
     this.image = image;
     this.moves = moves;
     this.types = types;
-    this.abillity = abillity;
   }
 }
 
@@ -27,7 +17,7 @@ let typesLi = document.getElementById("type");
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
 let rearview = document.getElementById("rearview");
-let description = document.getElementById("pokemon-description");
+
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
@@ -36,7 +26,7 @@ let rearViewImg = false;
 let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
-const pokemonApiSpecies = `https://pokeapi.co/api/v2/pokemon-species/`;
+
 //pokeapi.co/api/v2/pokemon?limit=1126/--- -----
 // Search function
 let fetetchPokemon = function (inputNum) {
