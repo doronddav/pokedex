@@ -1,9 +1,14 @@
 class Pokemon {
+<<<<<<< HEAD
   constructor(name, image, moves, types) {
+=======
+  constructor(name, image, moves, types, abilities) {
+>>>>>>> a371f31527dddfe2a72161463e0eff06b6a82b2f
     this.name = name;
     this.image = image;
     this.moves = moves;
     this.types = types;
+    this.abilities = abilities;
   }
 }
 
@@ -14,6 +19,7 @@ let pokemonName = document.getElementById("pokemonNameDisplay");
 let pokemonImg = document.getElementById("pokemonImg");
 let movesLi = document.getElementById("moves");
 let typesLi = document.getElementById("type");
+let abilitiesLi = document.getElementById("ability");
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
 let rearview = document.getElementById("rearview");
@@ -21,14 +27,12 @@ let rearview = document.getElementById("rearview");
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
-// pokeIdInput = false;
-// pokeNameInput = false;
+
 let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
 
-//pokeapi.co/api/v2/pokemon?limit=1126/--- -----
-// Search function
+
 let fetetchPokemon = function (inputNum) {
   https: fetch(`${pokemonApi}` + `${inputNum}`)
     .then((response) => response.json())
@@ -40,19 +44,26 @@ let fetetchPokemon = function (inputNum) {
           response.name,
           response.sprites,
           response.moves,
-          response.types
+          response.types,
+          response.abilities
         ))
     )
     // .then((pokemon) => console.log(pokemon.name));
     // .then((pokemon) => console.log(pokemon.types[0].type.name))
+<<<<<<< HEAD
     .then(() => displayPokemon());
+=======
+    .then(displayPokemon());
+>>>>>>> a371f31527dddfe2a72161463e0eff06b6a82b2f
 };
+
 
 let displayPokemon = function () {
   pokemonName.innerHTML = pokemon.name;
   pokemonImg.src = pokemon.image.front_default;
   displayMoves(pokemon.moves);
   displayType(pokemon.types);
+  displayAbilities(pokemon.abilities);
 };
 
 let displayMoves = function (moves) {
@@ -70,6 +81,15 @@ let displayType = function (types) {
     let typeElement = document.createElement("li");
     typeElement.innerHTML = types[i].type.name;
     typesLi.appendChild(typeElement);
+  }
+};
+
+let displayAbilities = function (abilities) {
+  abilitiesLi.innerHTML = "";
+  for (let i = 0; i < abilities.length; i++) {
+    let abiltiyElement = document.createElement("li");
+    abiltiyElement.innerHTML = abilities[i].ability.name;
+    abilitiesLi.appendChild(abiltiyElement);
   }
 };
 
