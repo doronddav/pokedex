@@ -13,6 +13,7 @@ class Pokemon {
     this.image = image;
     this.moves = moves;
     this.types = types;
+    this.abillity = abillity;
   }
 }
 
@@ -26,6 +27,7 @@ let typesLi = document.getElementById("type");
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
 let rearview = document.getElementById("rearview");
+let description = document.getElementById("pokemon-description");
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
@@ -34,7 +36,7 @@ let rearViewImg = false;
 let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
-
+const pokemonApiSpecies = `https://pokeapi.co/api/v2/pokemon-species/`;
 //pokeapi.co/api/v2/pokemon?limit=1126/--- -----
 // Search function
 let fetetchPokemon = function (inputNum) {
@@ -53,7 +55,7 @@ let fetetchPokemon = function (inputNum) {
     )
     // .then((pokemon) => console.log(pokemon.name));
     // .then((pokemon) => console.log(pokemon.types[0].type.name))
-    .finally(() => displayPokemon());
+    .then(() => displayPokemon());
 };
 
 let displayPokemon = function () {
@@ -118,15 +120,6 @@ rearview.addEventListener("click", (event) => {
     pokemonImg.src = pokemon.image.back_shiny;
   }
 });
-
-// let displayinput = function () {
-//   if (pokeIdInput.value.length > 0) {
-//     pokeInputName.style.display = "none";
-//   } else if (pokeInputName.value.length > 0) {
-//     pokeIdInput.style.display = "none";
-//   }
-// };
-// displayinput();
 
 search.addEventListener("click", (event) => {
   inputNum = pokeIdInput.value;
