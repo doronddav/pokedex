@@ -13,7 +13,6 @@ class Pokemon {
 }
 
 let pokeIdInput = document.getElementById("pokemonId");
-// let pokeNameInput = document.getElementById("pokemonId");
 let search = document.getElementById("search");
 let pokemonName = document.getElementById("pokemonNameDisplay");
 let pokemonImg = document.getElementById("pokemonImg");
@@ -102,7 +101,7 @@ let displayAbilities = function (abilities) {
   }
 };
 
-shiny.addEventListener("click", (event) => {
+shiny.addEventListener("click", () => {
   if (pokemonShiny) {
     pokemonShiny = false;
     if (!rearViewImg) {
@@ -121,8 +120,7 @@ shiny.addEventListener("click", (event) => {
   }
 });
 
-// Rotate
-fronteview.addEventListener("click", (event) => {
+fronteview.addEventListener("click", () => {
   rearViewImg = false;
   if (!pokemonShiny) {
     pokemonImg.src = pokemon.image.front_default;
@@ -131,7 +129,7 @@ fronteview.addEventListener("click", (event) => {
   }
 });
 
-rearview.addEventListener("click", (event) => {
+rearview.addEventListener("click", () => {
   rearViewImg = true;
   if (!pokemonShiny) {
     pokemonImg.src = pokemon.image.back_default;
