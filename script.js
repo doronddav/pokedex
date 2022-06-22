@@ -1,9 +1,5 @@
 class Pokemon {
-<<<<<<< HEAD
-  constructor(name, image, moves, types) {
-=======
   constructor(name, image, moves, types, abilities) {
->>>>>>> a371f31527dddfe2a72161463e0eff06b6a82b2f
     this.name = name;
     this.image = image;
     this.moves = moves;
@@ -23,7 +19,6 @@ let abilitiesLi = document.getElementById("ability");
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
 let rearview = document.getElementById("rearview");
-
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
@@ -32,34 +27,24 @@ let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
 
-
-let fetetchPokemon = function (inputNum) {
-  https: fetch(`${pokemonApi}` + `${inputNum}`)
+const fetetchPokemon = function (inputNum) {
+  fetch(`${pokemonApi}` + `${inputNum}`)
     .then((response) => response.json())
+    .then((response) => {
+      pokemon = new Pokemon(
+        response.name,
+        response.sprites,
+        response.moves,
+        response.types,
+        response.abilities
+      );
 
-    // .then((response) => console.log(response))
-    .then(
-      (response) =>
-        (pokemon = new Pokemon(
-          response.name,
-          response.sprites,
-          response.moves,
-          response.types,
-          response.abilities
-        ))
-    )
-    // .then((pokemon) => console.log(pokemon.name));
-    // .then((pokemon) => console.log(pokemon.types[0].type.name))
-<<<<<<< HEAD
-    .then(() => displayPokemon());
-=======
-    .then(displayPokemon());
->>>>>>> a371f31527dddfe2a72161463e0eff06b6a82b2f
+      displayPokemon();
+    });
 };
 
-
-let displayPokemon = function () {
-  pokemonName.innerHTML = pokemon.name;
+const displayPokemon = function () {
+  pokemonName.innerText = pokemon.name;
   pokemonImg.src = pokemon.image.front_default;
   displayMoves(pokemon.moves);
   displayType(pokemon.types);
@@ -67,28 +52,28 @@ let displayPokemon = function () {
 };
 
 let displayMoves = function (moves) {
-  movesLi.innerHTML = "";
+  movesLi.innerText = "";
   for (let i = 0; i < moves.length; i++) {
     let moveElement = document.createElement("li");
-    moveElement.innerHTML = moves[i].move.name;
+    moveElement.innerText = moves[i].move.name;
     movesLi.appendChild(moveElement);
   }
 };
 
 let displayType = function (types) {
-  typesLi.innerHTML = "";
+  typesLi.innerText = "";
   for (let i = 0; i < types.length; i++) {
     let typeElement = document.createElement("li");
-    typeElement.innerHTML = types[i].type.name;
+    typeElement.innerText = types[i].type.name;
     typesLi.appendChild(typeElement);
   }
 };
 
 let displayAbilities = function (abilities) {
-  abilitiesLi.innerHTML = "";
+  abilitiesLi.innerText = "";
   for (let i = 0; i < abilities.length; i++) {
     let abiltiyElement = document.createElement("li");
-    abiltiyElement.innerHTML = abilities[i].ability.name;
+    abiltiyElement.innerText = abilities[i].ability.name;
     abilitiesLi.appendChild(abiltiyElement);
   }
 };
@@ -131,8 +116,29 @@ rearview.addEventListener("click", (event) => {
   }
 });
 
-search.addEventListener("click", (event) => {
+search.addEventListener("click", () => {
   inputNum = pokeIdInput.value;
-  console.log(inputNum);
-  fetetchPokemon(inputNum);
+  if (pokeIdInput.value == "") {
+    alert("You must write Pokemon number or Pokemon name");
+  } else {
+    fetetchPokemon(inputNum);
+    console.log(inputNum);
+    fetetchPokemon(inputNum);
+  }
+});
+
+// search.addEventListener("keypress", function (e) {
+//   inputNum = pokeIdInput.value;
+//   if (e === "Enter") {
+//     if (pokeIdInput.value == 0 || "") {
+//       event.alert("You must write Pokemon number or Pokemon name");
+//     } else {
+//       event.fetetchPokemon(inputNum);
+//     }
+//   }
+// });
+pokeIdInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    search.click();
+  }
 });
