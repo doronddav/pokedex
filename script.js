@@ -7,7 +7,8 @@ class Pokemon {
     this.abilities = abilities;
   }
 
-  setDescription(description){
+
+  setDescription(description) {
     this.description = description;
   }
 }
@@ -38,6 +39,20 @@ const pokemon_speciesAPI = 'http://pokeapi.co/api/v2/pokemon-species/';
 const fetetchPokemon = function (inputNum) {
   fetch(`${pokemonApi}` + `${inputNum}`)
     .then((response) => response.json())
+    .then((response) => {
+      pokemon = new Pokemon(
+        response.name,
+        response.sprites,
+        response.moves,
+        response.types,
+        response.abilities
+      );
+    });
+
+
+const fetetchPokemon = function (inputNum) {
+  fetch(`${pokemonApi}` + `${inputNum}`)
+    .then((response) => response.json())
     .then((response) =>{
           pokemon = new Pokemon(
           response.name,
@@ -54,8 +69,6 @@ const fetetchPokemon = function (inputNum) {
           displayPokemon();  
           });
         
-        
-          
 };
 
 let displayPokemon = function () {
@@ -66,6 +79,7 @@ let displayPokemon = function () {
   displayAbilities(pokemon.abilities);
   displayDescription(pokemon.description);
 };
+
 
 let displayMoves = function (moves) { 
   movesLi.innerText = "";
@@ -84,6 +98,7 @@ let displayType = function (types) {
     typesLi.appendChild(typeElement);
   }
 };
+
 
 let displayDescription = function (description_list){
   descriptionOutput.innerText = "";
@@ -142,7 +157,18 @@ rearview.addEventListener("click", (event) => {
   }
 });
 
-search.addEventListener("click", (event) => {
+search.addEventListener("click", () => {
   inputNum = pokeIdInput.value;
-  fetetchPokemon(inputNum);
+  if (pokeIdInput.value == "") {
+    alert("You must write Pokemon number or Pokemon name");
+  } else {
+    fetetchPokemon(inputNum);
+  }
+});
+
+pokeIdInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    search.click();
+  }
+
 });
