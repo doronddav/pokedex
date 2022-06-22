@@ -1,12 +1,4 @@
 class Pokemon {
-  //   constructor(inputNum, name, image, description, abillity, types) {
-  //     this.inputNum = inputNum;
-  //     this.name = name;
-  //     this.image = image;
-  //     this.description = description;
-  //     this.abillity = abillity;
-  //     this.types = types;
-  //   }
 
   constructor(name, image, moves, types, abilities) {
     this.name = name;
@@ -15,10 +7,14 @@ class Pokemon {
     this.types = types;
     this.abilities = abilities;
   }
+
+  setDescription(description){
+    this.description = description;
+  }
 }
 
 let pokeIdInput = document.getElementById("pokemonId");
-let pokeNameInput = document.getElementById("pokemonId");
+// let pokeNameInput = document.getElementById("pokemonId");
 let search = document.getElementById("search");
 let pokemonName = document.getElementById("pokemonNameDisplay");
 let pokemonImg = document.getElementById("pokemonImg");
@@ -27,70 +23,84 @@ let typesLi = document.getElementById("type");
 let abilitiesLi = document.getElementById("ability")
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
-let rearview = document.getElementById("rearview");
+let rearview = document.getElementById("rearview"); 
+let descriptionOutput = document.getElementById("pokemonDescription");
 let pokemon;
 let pokemonShiny = false;
 let rearViewImg = false;
 
-// pokeIdInput = false;
-// pokeNameInput = false;
+let description = "";
 let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
+const pokemon_speciesAPI = 'http://pokeapi.co/api/v2/pokemon-species/';
 
 
-let fetetchPokemon = function (inputNum) {
-  https: fetch(`${pokemonApi}` + `${inputNum}`)
+const fetetchPokemon = function (inputNum) {
+  fetch(`${pokemonApi}` + `${inputNum}`)
     .then((response) => response.json())
-
-    // .then((response) => console.log(response))
-    .then(
-      (response) =>
-        (pokemon = new Pokemon(
+    .then((response) =>{
+          pokemon = new Pokemon(
           response.name,
           response.sprites,
           response.moves,
           response.types,
           response.abilities
-        ))
-    )
-    // .then((pokemon) => console.log(pokemon.name));
-    // .then((pokemon) => console.log(pokemon.types[0].type.name))
-    .then(displayPokemon());
+        )});        
+        
+        fetch(`${pokemon_speciesAPI}` + `${inputNum}`)
+          .then((response) => response.json())
+          .then((response) => {pokemon.setDescription(response.flavor_text_entries)
+          
+          displayPokemon();  
+          });
+        
+        
+          
 };
 
-
 let displayPokemon = function () {
-  pokemonName.innerHTML = pokemon.name;
+  pokemonName.innerText = pokemon.name;
   pokemonImg.src = pokemon.image.front_default;
   displayMoves(pokemon.moves);
   displayType(pokemon.types);
   displayAbilities(pokemon.abilities);
+  displayDescription(pokemon.description);
 };
 
-let displayMoves = function (moves) {
-  movesLi.innerHTML = "";
+let displayMoves = function (moves) { 
+  movesLi.innerText = "";
   for (let i = 0; i < moves.length; i++) {
     let moveElement = document.createElement("li");
-    moveElement.innerHTML = moves[i].move.name;
+    moveElement.innerText = moves[i].move.name;
     movesLi.appendChild(moveElement);
   }
 };
 
 let displayType = function (types) {
-  typesLi.innerHTML = "";
+  typesLi.innerText = "";
   for (let i = 0; i < types.length; i++) {
     let typeElement = document.createElement("li");
-    typeElement.innerHTML = types[i].type.name;
+    typeElement.innerText = types[i].type.name;
     typesLi.appendChild(typeElement);
   }
 };
 
+let displayDescription = function (description_list){
+  descriptionOutput.innerText = "";
+  for(let i = 0 ; i < description_list.length ; i++){
+      if(description_list[i].language.name == "en" && description_list[i].version.name == "red"){
+        descriptionOutput.innerText = description_list[i].flavor_text; 
+        break;      
+      }
+  }
+};
+
 let displayAbilities = function (abilities) {
-  abilitiesLi.innerHTML = "";
+  abilitiesLi.innerText = "";
   for (let i = 0; i < abilities.length; i++) {
     let abiltiyElement = document.createElement("li");
-    abiltiyElement.innerHTML = abilities[i].ability.name;
+    abiltiyElement.innerText = abilities[i].ability.name;
     abilitiesLi.appendChild(abiltiyElement);
   }
 };
@@ -145,7 +155,6 @@ rearview.addEventListener("click", (event) => {
 
 search.addEventListener("click", (event) => {
   inputNum = pokeIdInput.value;
-  console.log(inputNum);
   fetetchPokemon(inputNum);
 });
 
