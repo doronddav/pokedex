@@ -7,6 +7,7 @@ class Pokemon {
     this.abilities = abilities;
   }
 
+
   setDescription(description) {
     this.description = description;
   }
@@ -22,7 +23,7 @@ let typesLi = document.getElementById("type");
 let abilitiesLi = document.getElementById("ability");
 let shiny = document.getElementById("shiny");
 let fronteview = document.getElementById("fronteview");
-let rearview = document.getElementById("rearview");
+let rearview = document.getElementById("rearview"); 
 let descriptionOutput = document.getElementById("pokemonDescription");
 let pokemon;
 let pokemonShiny = false;
@@ -32,7 +33,8 @@ let description = "";
 let inputNum = "";
 let inputName = "";
 const pokemonApi = `https://pokeapi.co/api/v2/pokemon/`;
-const pokemon_speciesAPI = "http://pokeapi.co/api/v2/pokemon-species/";
+const pokemon_speciesAPI = 'http://pokeapi.co/api/v2/pokemon-species/';
+
 
 const fetetchPokemon = function (inputNum) {
   fetch(`${pokemonApi}` + `${inputNum}`)
@@ -47,13 +49,26 @@ const fetetchPokemon = function (inputNum) {
       );
     });
 
-  fetch(`${pokemon_speciesAPI}` + `${inputNum}`)
-    .then((response) => response.json())
-    .then((response) => {
-      pokemon.setDescription(response.flavor_text_entries);
 
-      displayPokemon();
-    });
+const fetetchPokemon = function (inputNum) {
+  fetch(`${pokemonApi}` + `${inputNum}`)
+    .then((response) => response.json())
+    .then((response) =>{
+          pokemon = new Pokemon(
+          response.name,
+          response.sprites,
+          response.moves,
+          response.types,
+          response.abilities
+        )});        
+        
+        fetch(`${pokemon_speciesAPI}` + `${inputNum}`)
+          .then((response) => response.json())
+          .then((response) => {pokemon.setDescription(response.flavor_text_entries)
+          
+          displayPokemon();  
+          });
+        
 };
 
 let displayPokemon = function () {
@@ -65,7 +80,8 @@ let displayPokemon = function () {
   displayDescription(pokemon.description);
 };
 
-let displayMoves = function (moves) {
+
+let displayMoves = function (moves) { 
   movesLi.innerText = "";
   for (let i = 0; i < moves.length; i++) {
     let moveElement = document.createElement("li");
@@ -83,16 +99,14 @@ let displayType = function (types) {
   }
 };
 
-let displayDescription = function (description_list) {
+
+let displayDescription = function (description_list){
   descriptionOutput.innerText = "";
-  for (let i = 0; i < description_list.length; i++) {
-    if (
-      description_list[i].language.name == "en" &&
-      description_list[i].version.name == "red"
-    ) {
-      descriptionOutput.innerText = description_list[i].flavor_text;
-      break;
-    }
+  for(let i = 0 ; i < description_list.length ; i++){
+      if(description_list[i].language.name == "en" && description_list[i].version.name == "red"){
+        descriptionOutput.innerText = description_list[i].flavor_text; 
+        break;      
+      }
   }
 };
 
@@ -149,8 +163,6 @@ search.addEventListener("click", () => {
     alert("You must write Pokemon number or Pokemon name");
   } else {
     fetetchPokemon(inputNum);
-    console.log(inputNum);
-    fetetchPokemon(inputNum);
   }
 });
 
@@ -158,4 +170,5 @@ pokeIdInput.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     search.click();
   }
+
 });
