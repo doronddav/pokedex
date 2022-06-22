@@ -86,10 +86,7 @@ let displayType = function (types) {
 let displayDescription = function (description_list) {
   descriptionOutput.innerText = "";
   for (let i = 0; i < description_list.length; i++) {
-    if (
-      description_list[i].language.name == "en" &&
-      description_list[i].version.name == "red"
-    ) {
+    if (description_list[i].language.name == "en") {
       descriptionOutput.innerText = description_list[i].flavor_text;
       break;
     }
@@ -145,8 +142,8 @@ rearview.addEventListener("click", (event) => {
 
 search.addEventListener("click", () => {
   inputNum = pokeIdInput.value;
-  if (pokeIdInput.value == "") {
-    alert("You must write Pokemon number or Pokemon name");
+  if (pokeIdInput.value == "" || pokeIdInput.value >= 899) {
+    alert("You must write valid Pokemon name or Pokemon number(1-898)");
   } else {
     fetetchPokemon(inputNum);
     console.log(inputNum);
